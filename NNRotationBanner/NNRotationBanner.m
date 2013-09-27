@@ -48,6 +48,9 @@
 }
 
 #pragma mark - UIScrollViewDelegate
-
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    
+}
 
 @end

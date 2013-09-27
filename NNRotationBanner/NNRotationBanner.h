@@ -18,6 +18,7 @@
 @property (nonatomic, weak) id<NNRotationBannerDelegate> delegate;
 
 - (NNRotationBannerCell *)dequeueReusableCellWithIdentifier:(NSString *)reuseIdentifier;
+- (void)reloadData;
 
 @end
 

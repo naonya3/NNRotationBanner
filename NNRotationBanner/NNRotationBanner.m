@@ -34,11 +34,6 @@
     return self;
 }
 
-- (NNRotationBannerCell *)dequeueReusableCellWithIdentifier:(NSString *)reuseIdentifier
-{
-    return nil;
-}
-
 - (void)_initialize
 {
     _scrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
@@ -47,7 +42,18 @@
     [self addSubview:_scrollView];
 }
 
+- (NNRotationBannerCell *)dequeueReusableCellWithIdentifier:(NSString *)reuseIdentifier
+{
+    return nil;
+}
+
+- (void)reloadData
+{
+    
+}
+
 #pragma mark - UIScrollViewDelegate
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     

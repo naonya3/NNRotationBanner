@@ -38,9 +38,8 @@
     [super viewDidLoad];
     _rotationBannerView = [[NNRotationBanner alloc] initWithFrame:(CGRect){
                                                                             0.f,
-                                                                            100.f,
-                                                                            CGRectGetWidth(self.view.frame),
-                                                                            80.f
+                                                                            0.f,
+                                                                            self.view.frame.size
                                                                         }];
     _rotationBannerView.delegate = self;
     [self.view addSubview:_rotationBannerView];

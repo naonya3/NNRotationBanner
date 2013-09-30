@@ -13,6 +13,9 @@
 @property (nonatomic, copy, readonly) NSString *reuseIdentifier;
 @property (nonatomic, strong, readonly) UIView *contentView;
 
+// TEST
+@property (nonatomic, strong) UILabel *textLabel;
+
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifier;
 - (void)prepareForReuse;
 

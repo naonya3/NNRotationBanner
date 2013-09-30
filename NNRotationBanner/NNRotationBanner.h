@@ -12,7 +12,7 @@
 
 @protocol NNRotationBannerDelegate;
 
-@interface NNRotationBanner : UIView 
+@interface NNRotationBanner : UIScrollView
 
 @property (nonatomic) int currentIndex;
 @property (nonatomic, weak) id<NNRotationBannerDelegate> delegate;

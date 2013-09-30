@@ -11,7 +11,7 @@
 #import "NNRotationBanner.h"
 #import "NNRotationBannerCell.h"
 
-#define NUMBER_OF_BANNER 5
+#define NUMBER_OF_BANNER 100
 
 @interface NNViewController ()<NNRotationBannerDelegate>
 {
@@ -49,7 +49,7 @@
         [tmpArr addObject:[self _randomColor]];
     }
     _datas = tmpArr.copy;
-    [_rotationBannerView reload];
+    [_rotationBannerView reloadData];
 }
 
 - (int)numberOfBannersInRotationBanner:(NNRotationBanner *)rotationBanner
@@ -65,6 +65,7 @@
         cell = [[NNRotationBannerCell alloc] initWithReuseIdentifier:identifier];
     }
     cell.contentView.backgroundColor = _datas[index];
+    cell.textLabel.text = [@(index) stringValue];
     return cell;
 }
 

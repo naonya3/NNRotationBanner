@@ -11,7 +11,8 @@
 #import "NNRotationBanner.h"
 #import "NNRotationBannerCell.h"
 
-#define NUMBER_OF_BANNER 100
+#define NUMBER_OF_BANNER 10
+
 
 @interface NNViewController ()<NNRotationBannerDelegate>
 {
@@ -76,6 +77,5 @@
     CGFloat brightness = ( arc4random() % 128 / 256.0 ) + 0.5;
     return [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1];
 }
-
 
 @end

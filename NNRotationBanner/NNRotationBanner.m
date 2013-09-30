@@ -16,6 +16,7 @@
     
     int _numOfContent;
     CGSize _contentSize;
+    float _startOffsetX;
     
     NSMutableSet *_visibleCells;
     NSMutableDictionary *_supplementaryViewReuseQueues;
@@ -57,6 +58,18 @@
 
 - (void)layoutSubviews
 {
+    float offsetX = self.contentOffset.x;
+    float maxX = self.bounds.size.width * (_numOfContent * 3);
+    float minX = self.bounds.size.width * _numOfContent;
+    
+    if (offsetX > maxX) {
+        self.contentOffset = (CGPoint){self.bounds.size.width * (_numOfContent * 2) + abs(offsetX - maxX),0};
+    }
+    
+    if (offsetX < minX) {
+        self.contentOffset = (CGPoint){self.bounds.size.width * (_numOfContent * 2) + abs(offsetX - minX),0};
+    }
+    
     NSArray *indexs = [self indexsForItemInRect:(CGRect){
         .origin = self.contentOffset,
         .size = self.frame.size
@@ -73,7 +86,6 @@
             [_visibleCells removeObject:cell];
         }
     }
-    
     for (NNRotationBannerCell *reusableCell in _visibleCells) {
         [self queueReusableCell:reusableCell];
     }
@@ -96,7 +108,6 @@
 {
     NSMutableSet *reusableCells = _supplementaryViewReuseQueues[reuseIdentifier];
     NNRotationBannerCell *cell = [reusableCells anyObject];
-    // ここで消さないほうがいいかも
     if (cell) {
         [reusableCells removeObject:cell];
     }
@@ -114,13 +125,12 @@
         .x = 0,
         .y = 0
     };
-//    [self layoutSubviews];
 }
 
 - (CGSize)_contentSize
 {
     return (CGSize) {
-        (float)[self _numOfBanners] * CGRectGetWidth(self.frame),
+        (float)[self _numOfBanners] * CGRectGetWidth(self.frame) * 4,
         CGRectGetHeight(self.frame)
     };
 }
@@ -143,8 +153,9 @@
     }
     
     if (self.delegate && [self.delegate respondsToSelector:@selector(rotationBanner:cellForIndex:)]) {
-        return [self.delegate rotationBanner:self cellForIndex:index];
+        return [self.delegate rotationBanner:self cellForIndex:[self _convertIndexFromInternalIndex:index]];
     }
+    
     return nil;
 }
 
@@ -178,6 +189,12 @@
     }
 
     return indexs;
+}
+
+- (int)_convertIndexFromInternalIndex:(int)internalIndex
+{
+    int maxNum = _numOfContent;
+    return (internalIndex<maxNum)?internalIndex:internalIndex%maxNum;
 }
 
 @end

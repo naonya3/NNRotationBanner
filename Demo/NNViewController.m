@@ -8,7 +8,17 @@
 
 #import "NNViewController.h"
 
-@interface NNViewController ()
+#import "NNRotationBanner.h"
+#import "NNRotationBannerCell.h"
+
+#define NUMBER_OF_BANNER 10
+
+
+@interface NNViewController ()<NNRotationBannerDelegate>
+{
+    NNRotationBanner *_rotationBannerView;
+    NSArray *_datas;
+}
 
 @end
 
@@ -18,7 +28,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        
     }
     return self;
 }
@@ -26,13 +36,45 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    _rotationBannerView = [[NNRotationBanner alloc] initWithFrame:(CGRect){
+                                                                            0.f,
+                                                                            0.f,
+                                                                            self.view.frame.size
+                                                                        }];
+    _rotationBannerView.delegate = self;
+    [self.view addSubview:_rotationBannerView];
+    
+    NSMutableArray *tmpArr = @[].mutableCopy;
+    for (int i = 0; i < NUMBER_OF_BANNER; i++) {
+        [tmpArr addObject:[self _randomColor]];
+    }
+    _datas = tmpArr.copy;
+    [_rotationBannerView reloadData];
 }
 
-- (void)didReceiveMemoryWarning
+- (int)numberOfBannersInRotationBanner:(NNRotationBanner *)rotationBanner
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    return NUMBER_OF_BANNER;
+}
+
+- (NNRotationBannerCell *)rotationBanner:(NNRotationBanner *)rotationBanner cellForIndex:(int)index
+{
+    static NSString *identifier = @"cell";
+    NNRotationBannerCell *cell = [rotationBanner dequeueReusableCellWithIdentifier:identifier];
+    if (!cell) {
+        cell = [[NNRotationBannerCell alloc] initWithReuseIdentifier:identifier];
+    }
+    cell.contentView.backgroundColor = _datas[index];
+    cell.textLabel.text = [@(index) stringValue];
+    return cell;
+}
+
+- (UIColor *)_randomColor
+{
+    CGFloat hue = ( arc4random() % 256 / 256.0 );
+    CGFloat saturation = ( arc4random() % 128 / 256.0 ) + 0.5;
+    CGFloat brightness = ( arc4random() % 128 / 256.0 ) + 0.5;
+    return [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1];
 }
 
 @end

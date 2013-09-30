@@ -8,7 +8,14 @@
 
 #import <XCTest/XCTest.h>
 
-@interface NNRotationBannerTests : XCTestCase
+#import "NNRotationBanner.h"
+
+#define NUM_OF_CELL 5
+
+@interface NNRotationBannerTests : XCTestCase<NNRotationBannerDelegate>
+{
+    NNRotationBanner *_rotationBanner;
+}
 
 @end
 
@@ -17,18 +24,22 @@
 - (void)setUp
 {
     [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
+    _rotationBanner = [[NNRotationBanner alloc] initWithFrame:[UIScreen mainScreen].bounds];
 }
 
 - (void)tearDown
 {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
 }
 
 - (void)testExample
 {
     XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
+}
+
+- (int)numberOfBannersInRotationBanner:(NNRotationBanner *)rotationBanner
+{
+    return NUM_OF_CELL;
 }
 
 @end

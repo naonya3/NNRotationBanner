@@ -38,7 +38,7 @@
 
 - (void)prepareForReuse
 {
-    NSLog(@"prepare");
+    
 }
 
 @end

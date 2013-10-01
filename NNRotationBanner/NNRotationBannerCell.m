@@ -29,6 +29,7 @@
         _textLabel.textColor = [UIColor whiteColor];
         _textLabel.shadowColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
         _textLabel.shadowOffset = CGSizeMake(0, 1);
+        _textLabel.backgroundColor = [UIColor clearColor];
         [self addSubview:_textLabel];
     }
     

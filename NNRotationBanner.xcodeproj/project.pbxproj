@@ -20,8 +20,8 @@
 		87D3A41117F57A090091D792 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D3A40A17F57A090091D792 /* main.m */; };
 		87D3A41217F57A090091D792 /* NNAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D3A40C17F57A090091D792 /* NNAppDelegate.m */; };
 		87D3A41617F57A180091D792 /* NNViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D3A41517F57A180091D792 /* NNViewController.m */; };
-		87D3A41917F57A620091D792 /* NNRotationBanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D3A41817F57A620091D792 /* NNRotationBanner.m */; };
-		87D3A41C17F57AEB0091D792 /* NNRotationBannerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D3A41B17F57AEB0091D792 /* NNRotationBannerCell.m */; };
+		87D3A41917F57A620091D792 /* NNRotationBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D3A41817F57A620091D792 /* NNRotationBannerView.m */; };
+		87D3A41C17F57AEB0091D792 /* NNRotationBannerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D3A41B17F57AEB0091D792 /* NNRotationBannerViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,10 +54,10 @@
 		87D3A40E17F57A090091D792 /* NNRotationBanner-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NNRotationBanner-Prefix.pch"; sourceTree = "<group>"; };
 		87D3A41417F57A180091D792 /* NNViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNViewController.h; sourceTree = "<group>"; };
 		87D3A41517F57A180091D792 /* NNViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NNViewController.m; sourceTree = "<group>"; };
-		87D3A41717F57A620091D792 /* NNRotationBanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNRotationBanner.h; sourceTree = "<group>"; };
-		87D3A41817F57A620091D792 /* NNRotationBanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NNRotationBanner.m; sourceTree = "<group>"; };
-		87D3A41A17F57AEB0091D792 /* NNRotationBannerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNRotationBannerCell.h; sourceTree = "<group>"; };
-		87D3A41B17F57AEB0091D792 /* NNRotationBannerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NNRotationBannerCell.m; sourceTree = "<group>"; };
+		87D3A41717F57A620091D792 /* NNRotationBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNRotationBannerView.h; sourceTree = "<group>"; };
+		87D3A41817F57A620091D792 /* NNRotationBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NNRotationBannerView.m; sourceTree = "<group>"; };
+		87D3A41A17F57AEB0091D792 /* NNRotationBannerViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNRotationBannerViewCell.h; sourceTree = "<group>"; };
+		87D3A41B17F57AEB0091D792 /* NNRotationBannerViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NNRotationBannerViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,10 +118,10 @@
 		87D3A3DD17F579F00091D792 /* NNRotationBanner */ = {
 			isa = PBXGroup;
 			children = (
-				87D3A41717F57A620091D792 /* NNRotationBanner.h */,
-				87D3A41817F57A620091D792 /* NNRotationBanner.m */,
-				87D3A41A17F57AEB0091D792 /* NNRotationBannerCell.h */,
-				87D3A41B17F57AEB0091D792 /* NNRotationBannerCell.m */,
+				87D3A41717F57A620091D792 /* NNRotationBannerView.h */,
+				87D3A41817F57A620091D792 /* NNRotationBannerView.m */,
+				87D3A41A17F57AEB0091D792 /* NNRotationBannerViewCell.h */,
+				87D3A41B17F57AEB0091D792 /* NNRotationBannerViewCell.m */,
 				8703825517FAA32100F3ABAB /* NNRotationBannerDelegate.h */,
 			);
 			path = NNRotationBanner;
@@ -260,8 +260,8 @@
 				87D3A41617F57A180091D792 /* NNViewController.m in Sources */,
 				87D3A41217F57A090091D792 /* NNAppDelegate.m in Sources */,
 				87D3A41117F57A090091D792 /* main.m in Sources */,
-				87D3A41917F57A620091D792 /* NNRotationBanner.m in Sources */,
-				87D3A41C17F57AEB0091D792 /* NNRotationBannerCell.m in Sources */,
+				87D3A41917F57A620091D792 /* NNRotationBannerView.m in Sources */,
+				87D3A41C17F57AEB0091D792 /* NNRotationBannerViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

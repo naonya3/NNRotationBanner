@@ -1,6 +1,6 @@
 //
 //  NNViewController.m
-//  NNRotationBanner
+//  NNRotationBannerView
 //
 //  Created by Naoto Horiguchi on 2013/09/27.
 //  Copyright (c) 2013年 Naoto Horiguchi. All rights reserved.
@@ -8,15 +8,15 @@
 
 #import "NNViewController.h"
 
-#import "NNRotationBanner.h"
-#import "NNRotationBannerCell.h"
+#import "NNRotationBannerView.h"
+#import "NNRotationBannerViewCell.h"
 
 #define NUMBER_OF_BANNER 10
 
 
-@interface NNViewController ()<NNRotationBannerDelegate>
+@interface NNViewController ()<NNRotationBannerViewDelegate>
 {
-    NNRotationBanner *_rotationBannerView;
+    NNRotationBannerView *_rotationBannerView;
     NSArray *_datas;
 }
 
@@ -36,7 +36,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _rotationBannerView = [[NNRotationBanner alloc] initWithFrame:(CGRect){
+    _rotationBannerView = [[NNRotationBannerView alloc] initWithFrame:(CGRect){
                                                                             0.f,
                                                                             0.f,
                                                                             self.view.frame.size
@@ -60,23 +60,23 @@
     return [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1];
 }
 
-#pragma mark - NNRotationBannerDelegate
-- (void)rotationBanner:(NNRotationBanner *)rotationBanner didSelectItemAtIndex:(int)selectedIndex
+#pragma mark - NNRotationBannerViewDelegate
+- (void)rotationBanner:(NNRotationBannerView *)rotationBanner didSelectItemAtIndex:(int)selectedIndex
 {
     NSLog(@"selected : %d", selectedIndex);
 }
 
-- (int)numberOfBannersInRotationBanner:(NNRotationBanner *)rotationBanner
+- (int)numberOfBannersInRotationBanner:(NNRotationBannerView *)rotationBanner
 {
     return NUMBER_OF_BANNER;
 }
 
-- (NNRotationBannerCell *)rotationBanner:(NNRotationBanner *)rotationBanner cellForIndex:(int)index
+- (NNRotationBannerViewCell *)rotationBanner:(NNRotationBannerView *)rotationBanner cellForIndex:(int)index
 {
     static NSString *identifier = @"cell";
-    NNRotationBannerCell *cell = [rotationBanner dequeueReusableCellWithIdentifier:identifier];
+    NNRotationBannerViewCell *cell = [rotationBanner dequeueReusableCellWithIdentifier:identifier];
     if (!cell) {
-        cell = [[NNRotationBannerCell alloc] initWithReuseIdentifier:identifier];
+        cell = [[NNRotationBannerViewCell alloc] initWithReuseIdentifier:identifier];
     }
     cell.contentView.backgroundColor = _datas[index];
     cell.textLabel.text = [@(index) stringValue];

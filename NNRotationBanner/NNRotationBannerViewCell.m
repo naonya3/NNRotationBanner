@@ -6,9 +6,9 @@
 //  Copyright (c) 2013年 Naoto Horiguchi. All rights reserved.
 //
 
-#import "NNRotationBannerCell.h"
+#import "NNRotationBannerViewCell.h"
 
-@implementation NNRotationBannerCell
+@implementation NNRotationBannerViewCell
 {
     UIScrollView *_scrollView;
 }

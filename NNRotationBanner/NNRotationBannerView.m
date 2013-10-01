@@ -6,11 +6,11 @@
 //  Copyright (c) 2013年 Naoto Horiguchi. All rights reserved.
 //
 
-#import "NNRotationBanner.h"
+#import "NNRotationBannerView.h"
 
-#import "NNRotationBannerCell.h"
+#import "NNRotationBannerViewCell.h"
 
-@interface NNRotationBanner ()<UIScrollViewDelegate>
+@interface NNRotationBannerView ()<UIScrollViewDelegate>
 {
     int _numOfContent;
     
@@ -22,7 +22,7 @@
 
 @end
 
-@implementation NNRotationBanner
+@implementation NNRotationBannerView
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -68,7 +68,7 @@
     NSMutableSet *visibleCells = [NSMutableSet set];
     for (NSNumber *i in indexs) {
         int index = [i intValue];
-        NNRotationBannerCell *cell = [self _cellForIndex:index];
+        NNRotationBannerViewCell *cell = [self _cellForIndex:index];
         cell.frame = [self _rectForItemAtIndex:index];
         [visibleCells addObject:cell];
         [self addSubview:cell];
@@ -76,13 +76,13 @@
             [_visibleCells removeObject:cell];
         }
     }
-    for (NNRotationBannerCell *reusableCell in _visibleCells) {
+    for (NNRotationBannerViewCell *reusableCell in _visibleCells) {
         [self queueReusableCell:reusableCell];
     }
     _visibleCells = visibleCells;
 }
 
-- (void)queueReusableCell:(NNRotationBannerCell *)cell
+- (void)queueReusableCell:(NNRotationBannerViewCell *)cell
 {
     [cell removeFromSuperview];
     [cell prepareForReuse];
@@ -94,10 +94,10 @@
     [reusableCells addObject:cell];
 }
 
-- (NNRotationBannerCell *)dequeueReusableCellWithIdentifier:(NSString *)reuseIdentifier
+- (NNRotationBannerViewCell *)dequeueReusableCellWithIdentifier:(NSString *)reuseIdentifier
 {
     NSMutableSet *reusableCells = _supplementaryViewReuseQueues[reuseIdentifier];
-    NNRotationBannerCell *cell = [reusableCells anyObject];
+    NNRotationBannerViewCell *cell = [reusableCells anyObject];
     if (cell) {
         [reusableCells removeObject:cell];
     }
@@ -127,9 +127,9 @@
     return 0;
 }
 
-- (NNRotationBannerCell *)_cellForIndex:(int)index
+- (NNRotationBannerViewCell *)_cellForIndex:(int)index
 {
-    for (NNRotationBannerCell *cell in _visibleCells) {
+    for (NNRotationBannerViewCell *cell in _visibleCells) {
         int i = [self indexForCell:cell];
         if (index == i) {
             return cell;
@@ -143,7 +143,7 @@
     return nil;
 }
 
-- (int)indexForCell:(NNRotationBannerCell *)cell
+- (int)indexForCell:(NNRotationBannerViewCell *)cell
 {
     if ([_visibleCells containsObject:cell]) {
         return cell.frame.origin.x / self.frame.size.width;
@@ -179,7 +179,7 @@
 
 - (int)_indexForItemAtPoint:(CGPoint)point
 {
-    for (NNRotationBannerCell *cell in _visibleCells) {
+    for (NNRotationBannerViewCell *cell in _visibleCells) {
         if (CGRectContainsPoint(cell.frame, point)) {
             return [self indexForCell:cell];
         }

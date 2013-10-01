@@ -14,17 +14,17 @@ typedef enum {
     NNRotationBannerCellIndexNotFound = -1
 }NNRotationBannerCellIndex;
 
-@class NNRotationBannerCell;
+@class NNRotationBannerViewCell, uitable;
 
-@interface NNRotationBanner : UIScrollView
+@interface NNRotationBannerView : UIScrollView
 
 @property (nonatomic) int currentIndex;
-@property (nonatomic, weak) id<NNRotationBannerDelegate>delegate;
+@property (nonatomic, weak) id<NNRotationBannerViewDelegate>delegate;
 
-- (NNRotationBannerCell *)dequeueReusableCellWithIdentifier:(NSString *)reuseIdentifier;
+- (NNRotationBannerViewCell *)dequeueReusableCellWithIdentifier:(NSString *)reuseIdentifier;
 
 // If target cell not show at screen, Return NNRotationBannerCellIndexNotFound.
-- (int)indexForCell:(NNRotationBannerCell *)cell;
+- (int)indexForCell:(NNRotationBannerViewCell *)cell;
 - (void)reloadData;
 
 @end

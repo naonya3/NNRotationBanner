@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NNRotationBannerCell : UIView
+@interface NNRotationBannerViewCell : UIView
 
 @property (nonatomic, copy, readonly) NSString *reuseIdentifier;
 @property (nonatomic, strong, readonly) UIView *contentView;

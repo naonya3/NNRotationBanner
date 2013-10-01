@@ -8,16 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
-@class NNRotationBannerCell, NNRotationBanner;
+@class NNRotationBannerViewCell, NNRotationBannerView;
 
-@protocol NNRotationBannerDelegate <UIScrollViewDelegate>
+@protocol NNRotationBannerViewDelegate <UIScrollViewDelegate>
 
 @required
-- (int)numberOfBannersInRotationBanner:(NNRotationBanner *)rotationBanner;
-- (NNRotationBannerCell *)rotationBanner:(NNRotationBanner *)rotationBanner cellForIndex:(int)index;
+- (int)numberOfBannersInRotationBanner:(NNRotationBannerView *)rotationBanner;
+- (NNRotationBannerViewCell *)rotationBanner:(NNRotationBannerView *)rotationBanner cellForIndex:(int)index;
 
 
 @optional
-- (void)rotationBanner:(NNRotationBanner *)rotationBanner didSelectItemAtIndex:(int)selectedIndex;
+- (void)rotationBanner:(NNRotationBannerView *)rotationBanner didSelectItemAtIndex:(int)selectedIndex;
 
 @end

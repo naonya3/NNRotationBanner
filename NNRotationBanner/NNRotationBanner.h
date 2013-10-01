@@ -22,6 +22,8 @@ typedef enum {
 @property (nonatomic, weak) id<NNRotationBannerDelegate>delegate;
 
 - (NNRotationBannerCell *)dequeueReusableCellWithIdentifier:(NSString *)reuseIdentifier;
+
+// If target cell not show at screen, Return NNRotationBannerCellIndexNotFound.
 - (int)indexForCell:(NNRotationBannerCell *)cell;
 - (void)reloadData;
 

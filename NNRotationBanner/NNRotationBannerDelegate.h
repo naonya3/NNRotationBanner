@@ -16,7 +16,8 @@
 - (int)numberOfBannersInRotationBanner:(NNRotationBanner *)rotationBanner;
 - (NNRotationBannerCell *)rotationBanner:(NNRotationBanner *)rotationBanner cellForIndex:(int)index;
 
+
 @optional
-- (void)rotationBanner:(NNRotationBanner *)rotationBanner didSelectedIndex:(int)selectedIndex;
+- (void)rotationBanner:(NNRotationBanner *)rotationBanner didSelectItemAtIndex:(int)selectedIndex;
 
 @end

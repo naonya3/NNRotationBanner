@@ -12,14 +12,12 @@
 
 @interface NNRotationBanner ()<UIScrollViewDelegate>
 {
-    UIScrollView *_scrollView;
-    
     int _numOfContent;
-    CGSize _contentSize;
-    float _startOffsetX;
     
     NSMutableSet *_visibleCells;
     NSMutableDictionary *_supplementaryViewReuseQueues;
+    
+    int _touchedIndex;
 }
 
 @end
@@ -108,9 +106,8 @@
 
 - (void)reloadData
 {
-    _contentSize = [self _contentSize];
     _numOfContent = [self _numOfBanners];
-    self.contentSize = _contentSize;
+    self.contentSize = [self _contentSize];
     self.contentOffset = CGPointZero;
 }
 
@@ -151,7 +148,7 @@
     if ([_visibleCells containsObject:cell]) {
         return cell.frame.origin.x / self.frame.size.width;
     }
-    return -1;
+    return NNRotationBannerCellIndexNotFound;
 }
 
 - (CGRect)_rectForItemAtIndex:(int)index
@@ -187,14 +184,18 @@
             return [self indexForCell:cell];
         }
     }
-    return -1;
+    return NNRotationBannerCellIndexNotFound;
 }
 
 #pragma mark - Touch Handler
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [super touchesBegan:touches withEvent:event];
-    
+    CGPoint point = [[touches anyObject] locationInView:self];
+    int index = [self _indexForItemAtPoint:point];
+    if (index != NNRotationBannerCellIndexNotFound) {
+        _touchedIndex = index;
+    }
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
@@ -206,12 +207,20 @@
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [super touchesEnded:touches withEvent:event];
-    
+    CGPoint point = [[touches anyObject] locationInView:self];
+    int index = [self _indexForItemAtPoint:point];
+    if (_touchedIndex != NNRotationBannerCellIndexNotFound && _touchedIndex == index) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(rotationBanner:didSelectItemAtIndex:)]) {
+            [self.delegate rotationBanner:self didSelectItemAtIndex:[self _convertIndexFromInternalIndex:index]];
+        }
+    }
+    _touchedIndex = NNRotationBannerCellIndexNotFound;
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [super touchesCancelled:touches withEvent:event];
+    _touchedIndex = NNRotationBannerCellIndexNotFound;
 }
 
 

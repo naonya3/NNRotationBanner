@@ -46,12 +46,6 @@
 
 - (void)_initialize
 {
-    //_scrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
-    //_scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    self.contentInset = UIEdgeInsetsMake(0, self.frame.size.width, 0, self.frame.size.width);
-    //_scrollView.delegate = self;
-    //[self addSubview:_scrollView];
-    
     _supplementaryViewReuseQueues = @{}.mutableCopy;
     _visibleCells = [[NSMutableSet alloc] init];
 }
@@ -70,7 +64,7 @@
         self.contentOffset = (CGPoint){self.bounds.size.width * (_numOfContent * 2) + abs(offsetX - minX),0};
     }
     
-    NSArray *indexs = [self indexsForItemInRect:(CGRect){
+    NSArray *indexs = [self _indexsForItemInRect:(CGRect){
         .origin = self.contentOffset,
         .size = self.frame.size
     }];
@@ -79,7 +73,7 @@
     for (NSNumber *i in indexs) {
         int index = [i intValue];
         NNRotationBannerCell *cell = [self _cellForIndex:index];
-        cell.frame = [self rectForItemAtIndex:index];
+        cell.frame = [self _rectForItemAtIndex:index];
         [visibleCells addObject:cell];
         [self addSubview:cell];
         if ([_visibleCells containsObject:cell]) {
@@ -167,9 +161,8 @@
     return -1;
 }
 
-- (CGRect)rectForItemAtIndex:(int)index
+- (CGRect)_rectForItemAtIndex:(int)index
 {
-    // とりあえずはマイナスのことは考えない
     return (CGRect){
         index * CGRectGetWidth(self.frame),
         0,
@@ -177,14 +170,12 @@
     };
 }
 
-- (NSArray *)indexsForItemInRect:(CGRect)rect
+- (NSArray *)_indexsForItemInRect:(CGRect)rect
 {
-    //内部的には最小Xをindex:0として扱い、外に見えるときは変換する
     NSMutableArray *indexs = @[].mutableCopy;
     
-    // とりあえずはマイナスのこと考えないで実装する
     int startIndex = rect.origin.x / self.frame.size.width;
-    for (int i = startIndex; i < startIndex + 2; i++) {
+    for (int i = startIndex; i < startIndex+2; i++) {
         [indexs addObject:@(i)];
     }
 

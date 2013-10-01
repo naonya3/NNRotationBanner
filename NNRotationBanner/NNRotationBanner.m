@@ -57,11 +57,9 @@
     float minX = self.bounds.size.width * _numOfContent;
     
     if (offsetX > maxX) {
-        self.contentOffset = (CGPoint){self.bounds.size.width * (_numOfContent * 2) + abs(offsetX - maxX),0};
-    }
-    
-    if (offsetX < minX) {
-        self.contentOffset = (CGPoint){self.bounds.size.width * (_numOfContent * 2) + abs(offsetX - minX),0};
+        self.contentOffset = (CGPoint){self.bounds.size.width * (_numOfContent * 2) + abs(offsetX - maxX), 0};
+    }else if (offsetX < minX) {
+        self.contentOffset = (CGPoint){self.bounds.size.width * (_numOfContent * 2) + abs(offsetX - minX), 0};
     }
     
     NSArray *indexs = [self _indexsForItemInRect:(CGRect){
@@ -184,8 +182,34 @@
 
 - (int)_convertIndexFromInternalIndex:(int)internalIndex
 {
-    int maxNum = _numOfContent;
-    return (internalIndex<maxNum)?internalIndex:internalIndex%maxNum;
+    return (internalIndex < _numOfContent)?internalIndex:internalIndex % _numOfContent;
 }
+
+
+#pragma mark - Touch Handler
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [super touchesBegan:touches withEvent:event];
+    
+}
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [super touchesMoved:touches withEvent:event];
+    
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [super touchesEnded:touches withEvent:event];
+    
+}
+
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [super touchesCancelled:touches withEvent:event];
+    
+}
+
 
 @end

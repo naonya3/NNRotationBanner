@@ -12,14 +12,12 @@
 
 @interface NNRotationBanner ()<UIScrollViewDelegate>
 {
-    UIScrollView *_scrollView;
-    
     int _numOfContent;
-    CGSize _contentSize;
-    float _startOffsetX;
     
     NSMutableSet *_visibleCells;
     NSMutableDictionary *_supplementaryViewReuseQueues;
+    
+    int _touchedIndex;
 }
 
 @end
@@ -46,12 +44,6 @@
 
 - (void)_initialize
 {
-    //_scrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
-    //_scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    self.contentInset = UIEdgeInsetsMake(0, self.frame.size.width, 0, self.frame.size.width);
-    //_scrollView.delegate = self;
-    //[self addSubview:_scrollView];
-    
     _supplementaryViewReuseQueues = @{}.mutableCopy;
     _visibleCells = [[NSMutableSet alloc] init];
 }
@@ -63,14 +55,12 @@
     float minX = self.bounds.size.width * _numOfContent;
     
     if (offsetX > maxX) {
-        self.contentOffset = (CGPoint){self.bounds.size.width * (_numOfContent * 2) + abs(offsetX - maxX),0};
+        self.contentOffset = (CGPoint){self.bounds.size.width * (_numOfContent * 2) + abs(offsetX - maxX), 0};
+    }else if (offsetX < minX) {
+        self.contentOffset = (CGPoint){self.bounds.size.width * (_numOfContent * 2) + abs(offsetX - minX), 0};
     }
     
-    if (offsetX < minX) {
-        self.contentOffset = (CGPoint){self.bounds.size.width * (_numOfContent * 2) + abs(offsetX - minX),0};
-    }
-    
-    NSArray *indexs = [self indexsForItemInRect:(CGRect){
+    NSArray *indexs = [self _indexsForItemInRect:(CGRect){
         .origin = self.contentOffset,
         .size = self.frame.size
     }];
@@ -79,7 +69,7 @@
     for (NSNumber *i in indexs) {
         int index = [i intValue];
         NNRotationBannerCell *cell = [self _cellForIndex:index];
-        cell.frame = [self rectForItemAtIndex:index];
+        cell.frame = [self _rectForItemAtIndex:index];
         [visibleCells addObject:cell];
         [self addSubview:cell];
         if ([_visibleCells containsObject:cell]) {
@@ -116,15 +106,9 @@
 
 - (void)reloadData
 {
-    _contentSize = [self _contentSize];
     _numOfContent = [self _numOfBanners];
-    
-//    //float startX = (CGRectGetWidth(self.frame) * (_numOfContent / 2));
-    self.contentSize = _contentSize;
-    self.contentOffset = (CGPoint) {
-        .x = 0,
-        .y = 0
-    };
+    self.contentSize = [self _contentSize];
+    self.contentOffset = CGPointZero;
 }
 
 - (CGSize)_contentSize
@@ -164,12 +148,11 @@
     if ([_visibleCells containsObject:cell]) {
         return cell.frame.origin.x / self.frame.size.width;
     }
-    return -1;
+    return NNRotationBannerCellIndexNotFound;
 }
 
-- (CGRect)rectForItemAtIndex:(int)index
+- (CGRect)_rectForItemAtIndex:(int)index
 {
-    // とりあえずはマイナスのことは考えない
     return (CGRect){
         index * CGRectGetWidth(self.frame),
         0,
@@ -177,14 +160,12 @@
     };
 }
 
-- (NSArray *)indexsForItemInRect:(CGRect)rect
+- (NSArray *)_indexsForItemInRect:(CGRect)rect
 {
-    //内部的には最小Xをindex:0として扱い、外に見えるときは変換する
     NSMutableArray *indexs = @[].mutableCopy;
     
-    // とりあえずはマイナスのこと考えないで実装する
     int startIndex = rect.origin.x / self.frame.size.width;
-    for (int i = startIndex; i < startIndex + 2; i++) {
+    for (int i = startIndex; i < startIndex+2; i++) {
         [indexs addObject:@(i)];
     }
 
@@ -193,8 +174,54 @@
 
 - (int)_convertIndexFromInternalIndex:(int)internalIndex
 {
-    int maxNum = _numOfContent;
-    return (internalIndex<maxNum)?internalIndex:internalIndex%maxNum;
+    return (internalIndex < _numOfContent)?internalIndex:internalIndex % _numOfContent;
 }
+
+- (int)_indexForItemAtPoint:(CGPoint)point
+{
+    for (NNRotationBannerCell *cell in _visibleCells) {
+        if (CGRectContainsPoint(cell.frame, point)) {
+            return [self indexForCell:cell];
+        }
+    }
+    return NNRotationBannerCellIndexNotFound;
+}
+
+#pragma mark - Touch Handler
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [super touchesBegan:touches withEvent:event];
+    CGPoint point = [[touches anyObject] locationInView:self];
+    int index = [self _indexForItemAtPoint:point];
+    if (index != NNRotationBannerCellIndexNotFound) {
+        _touchedIndex = index;
+    }
+}
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [super touchesMoved:touches withEvent:event];
+    
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [super touchesEnded:touches withEvent:event];
+    CGPoint point = [[touches anyObject] locationInView:self];
+    int index = [self _indexForItemAtPoint:point];
+    if (_touchedIndex != NNRotationBannerCellIndexNotFound && _touchedIndex == index) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(rotationBanner:didSelectItemAtIndex:)]) {
+            [self.delegate rotationBanner:self didSelectItemAtIndex:[self _convertIndexFromInternalIndex:index]];
+        }
+    }
+    _touchedIndex = NNRotationBannerCellIndexNotFound;
+}
+
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [super touchesCancelled:touches withEvent:event];
+    _touchedIndex = NNRotationBannerCellIndexNotFound;
+}
+
 
 @end

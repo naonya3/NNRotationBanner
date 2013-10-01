@@ -8,27 +8,25 @@
 
 #import <UIKit/UIKit.h>
 
-@class NNRotationBannerCell;
+#import "NNRotationBannerDelegate.h"
 
-@protocol NNRotationBannerDelegate;
+typedef enum {
+    NNRotationBannerCellIndexNotFound = -1
+}NNRotationBannerCellIndex;
+
+@class NNRotationBannerCell;
 
 @interface NNRotationBanner : UIScrollView
 
 @property (nonatomic) int currentIndex;
-@property (nonatomic, weak) id<NNRotationBannerDelegate> delegate;
+@property (nonatomic, weak) id<NNRotationBannerDelegate>delegate;
 
 - (NNRotationBannerCell *)dequeueReusableCellWithIdentifier:(NSString *)reuseIdentifier;
+
+// If target cell not show at screen, Return NNRotationBannerCellIndexNotFound.
+- (int)indexForCell:(NNRotationBannerCell *)cell;
 - (void)reloadData;
 
 @end
 
-@protocol NNRotationBannerDelegate <NSObject>
 
-@required
-- (int)numberOfBannersInRotationBanner:(NNRotationBanner *)rotationBanner;
-- (NNRotationBannerCell *)rotationBanner:(NNRotationBanner *)rotationBanner cellForIndex:(int)index;
-
-@optional
-- (void)rotationBanner:(NNRotationBanner *)rotationBanner didSelectedIndex:(int)selectedIndex;
-
-@end

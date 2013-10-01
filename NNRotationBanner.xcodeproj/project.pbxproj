@@ -35,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8703825517FAA32100F3ABAB /* NNRotationBannerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NNRotationBannerDelegate.h; sourceTree = "<group>"; };
 		87D3A3D417F579F00091D792 /* NNRotationBannerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NNRotationBannerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		87D3A3D717F579F00091D792 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		87D3A3D917F579F00091D792 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -121,6 +122,7 @@
 				87D3A41817F57A620091D792 /* NNRotationBanner.m */,
 				87D3A41A17F57AEB0091D792 /* NNRotationBannerCell.h */,
 				87D3A41B17F57AEB0091D792 /* NNRotationBannerCell.m */,
+				8703825517FAA32100F3ABAB /* NNRotationBannerDelegate.h */,
 			);
 			path = NNRotationBanner;
 			sourceTree = "<group>";

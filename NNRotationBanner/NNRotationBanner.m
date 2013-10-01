@@ -110,13 +110,8 @@
 {
     _contentSize = [self _contentSize];
     _numOfContent = [self _numOfBanners];
-    
-//    //float startX = (CGRectGetWidth(self.frame) * (_numOfContent / 2));
     self.contentSize = _contentSize;
-    self.contentOffset = (CGPoint) {
-        .x = 0,
-        .y = 0
-    };
+    self.contentOffset = CGPointZero;
 }
 
 - (CGSize)_contentSize
@@ -185,6 +180,15 @@
     return (internalIndex < _numOfContent)?internalIndex:internalIndex % _numOfContent;
 }
 
+- (int)_indexForItemAtPoint:(CGPoint)point
+{
+    for (NNRotationBannerCell *cell in _visibleCells) {
+        if (CGRectContainsPoint(cell.frame, point)) {
+            return [self indexForCell:cell];
+        }
+    }
+    return -1;
+}
 
 #pragma mark - Touch Handler
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -208,7 +212,6 @@
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [super touchesCancelled:touches withEvent:event];
-    
 }
 
 

@@ -20,8 +20,8 @@
 		87D3A41117F57A090091D792 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D3A40A17F57A090091D792 /* main.m */; };
 		87D3A41217F57A090091D792 /* NNAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D3A40C17F57A090091D792 /* NNAppDelegate.m */; };
 		87D3A41617F57A180091D792 /* NNViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D3A41517F57A180091D792 /* NNViewController.m */; };
-		87D3A41917F57A620091D792 /* NNRotationBanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D3A41817F57A620091D792 /* NNRotationBanner.m */; };
-		87D3A41C17F57AEB0091D792 /* NNRotationBannerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D3A41B17F57AEB0091D792 /* NNRotationBannerCell.m */; };
+		87D3A41917F57A620091D792 /* NNRotationBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D3A41817F57A620091D792 /* NNRotationBannerView.m */; };
+		87D3A41C17F57AEB0091D792 /* NNRotationBannerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D3A41B17F57AEB0091D792 /* NNRotationBannerViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8703825517FAA32100F3ABAB /* NNRotationBannerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NNRotationBannerDelegate.h; sourceTree = "<group>"; };
 		87D3A3D417F579F00091D792 /* NNRotationBannerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NNRotationBannerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		87D3A3D717F579F00091D792 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		87D3A3D917F579F00091D792 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -53,10 +54,10 @@
 		87D3A40E17F57A090091D792 /* NNRotationBanner-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NNRotationBanner-Prefix.pch"; sourceTree = "<group>"; };
 		87D3A41417F57A180091D792 /* NNViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNViewController.h; sourceTree = "<group>"; };
 		87D3A41517F57A180091D792 /* NNViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NNViewController.m; sourceTree = "<group>"; };
-		87D3A41717F57A620091D792 /* NNRotationBanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNRotationBanner.h; sourceTree = "<group>"; };
-		87D3A41817F57A620091D792 /* NNRotationBanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NNRotationBanner.m; sourceTree = "<group>"; };
-		87D3A41A17F57AEB0091D792 /* NNRotationBannerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNRotationBannerCell.h; sourceTree = "<group>"; };
-		87D3A41B17F57AEB0091D792 /* NNRotationBannerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NNRotationBannerCell.m; sourceTree = "<group>"; };
+		87D3A41717F57A620091D792 /* NNRotationBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNRotationBannerView.h; sourceTree = "<group>"; };
+		87D3A41817F57A620091D792 /* NNRotationBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NNRotationBannerView.m; sourceTree = "<group>"; };
+		87D3A41A17F57AEB0091D792 /* NNRotationBannerViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NNRotationBannerViewCell.h; sourceTree = "<group>"; };
+		87D3A41B17F57AEB0091D792 /* NNRotationBannerViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NNRotationBannerViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,10 +118,11 @@
 		87D3A3DD17F579F00091D792 /* NNRotationBanner */ = {
 			isa = PBXGroup;
 			children = (
-				87D3A41717F57A620091D792 /* NNRotationBanner.h */,
-				87D3A41817F57A620091D792 /* NNRotationBanner.m */,
-				87D3A41A17F57AEB0091D792 /* NNRotationBannerCell.h */,
-				87D3A41B17F57AEB0091D792 /* NNRotationBannerCell.m */,
+				87D3A41717F57A620091D792 /* NNRotationBannerView.h */,
+				87D3A41817F57A620091D792 /* NNRotationBannerView.m */,
+				87D3A41A17F57AEB0091D792 /* NNRotationBannerViewCell.h */,
+				87D3A41B17F57AEB0091D792 /* NNRotationBannerViewCell.m */,
+				8703825517FAA32100F3ABAB /* NNRotationBannerDelegate.h */,
 			);
 			path = NNRotationBanner;
 			sourceTree = "<group>";
@@ -258,8 +260,8 @@
 				87D3A41617F57A180091D792 /* NNViewController.m in Sources */,
 				87D3A41217F57A090091D792 /* NNAppDelegate.m in Sources */,
 				87D3A41117F57A090091D792 /* main.m in Sources */,
-				87D3A41917F57A620091D792 /* NNRotationBanner.m in Sources */,
-				87D3A41C17F57AEB0091D792 /* NNRotationBannerCell.m in Sources */,
+				87D3A41917F57A620091D792 /* NNRotationBannerView.m in Sources */,
+				87D3A41C17F57AEB0091D792 /* NNRotationBannerViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -376,12 +378,15 @@
 		87D3A40117F579F00091D792 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Demo/NNRotationBanner-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/Demo/NNRotationBanner-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)Demo";
+				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -389,12 +394,15 @@
 		87D3A40217F579F00091D792 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Demo/NNRotationBanner-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/Demo/NNRotationBanner-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)Demo";
+				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -460,6 +468,7 @@
 				87D3A40217F579F00091D792 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		87D3A40317F579F00091D792 /* Build configuration list for PBXNativeTarget "NNRotationBannerTests" */ = {
 			isa = XCConfigurationList;
@@ -468,6 +477,7 @@
 				87D3A40517F579F00091D792 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

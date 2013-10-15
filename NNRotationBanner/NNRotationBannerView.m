@@ -44,12 +44,20 @@
 
 - (void)_initialize
 {
+    self.showsHorizontalScrollIndicator = NO;
+    self.showsVerticalScrollIndicator = NO;
+    self.pagingEnabled = YES;
+    
+    _numOfContent = 0;
     _supplementaryViewReuseQueues = @{}.mutableCopy;
     _visibleCells = [[NSMutableSet alloc] init];
 }
 
 - (void)layoutSubviews
 {
+    if (_numOfContent <= 0)
+        return;
+    
     float offsetX = self.contentOffset.x;
     float maxX = self.bounds.size.width * (_numOfContent * 3);
     float minX = self.bounds.size.width * _numOfContent;

@@ -28,5 +28,3 @@ typedef enum {
 - (void)reloadData;
 
 @end
-
-

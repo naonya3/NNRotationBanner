@@ -8,8 +8,6 @@
 
 #import "NNRotationBannerView.h"
 
-#import "NNRotationBannerViewCell.h"
-
 @interface NNRotationBannerView ()<UIScrollViewDelegate>
 {
     int _numOfContent;

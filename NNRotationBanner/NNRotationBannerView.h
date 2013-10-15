@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 #import "NNRotationBannerDelegate.h"
+#import "NNRotationBannerViewCell.h"
 
 typedef enum {
     NNRotationBannerCellIndexNotFound = -1

@@ -19,5 +19,6 @@
 
 @optional
 - (void)rotationBanner:(NNRotationBannerView *)rotationBanner didSelectItemAtIndex:(int)selectedIndex;
+- (void)rotationBanner:(NNRotationBannerView *)rotationBanner updateCurrentIndex:(int)index;
 
 @end

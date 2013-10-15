@@ -42,6 +42,7 @@
                                                                             self.view.frame.size
                                                                         }];
     _rotationBannerView.delegate = self;
+    _rotationBannerView.pagingEnabled = NO;
     [self.view addSubview:_rotationBannerView];
     
     NSMutableArray *tmpArr = @[].mutableCopy;
@@ -66,6 +67,11 @@
     NSLog(@"selected : %d", selectedIndex);
 }
 
+- (void)rotationBanner:(NNRotationBannerView *)rotationBanner updateCurrentIndex:(int)index
+{
+    NSLog(@"update: %d", index);
+}
+
 - (int)numberOfBannersInRotationBanner:(NNRotationBannerView *)rotationBanner
 {
     return NUMBER_OF_BANNER;
@@ -82,6 +88,7 @@
     cell.textLabel.text = [@(index) stringValue];
     return cell;
 }
+
 
 
 

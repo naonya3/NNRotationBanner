@@ -11,9 +11,10 @@
 @interface NNRotationBannerView ()<UIScrollViewDelegate>
 {
     int _numOfContent;
-    
+    int _lastIndex;
     NSMutableSet *_visibleCells;
     NSMutableDictionary *_supplementaryViewReuseQueues;
+    
     
     int _touchedIndex;
 }
@@ -47,6 +48,7 @@
     self.pagingEnabled = YES;
     
     _numOfContent = 0;
+    _lastIndex = 0;
     _supplementaryViewReuseQueues = @{}.mutableCopy;
     _visibleCells = [[NSMutableSet alloc] init];
 }
@@ -72,6 +74,7 @@
     }];
     
     NSMutableSet *visibleCells = [NSMutableSet set];
+    int lastIndex;
     for (NSNumber *i in indexs) {
         int index = [i intValue];
         NNRotationBannerViewCell *cell = [self _cellForIndex:index];
@@ -81,7 +84,11 @@
         if ([_visibleCells containsObject:cell]) {
             [_visibleCells removeObject:cell];
         }
+        lastIndex = index;
     }
+    
+    [self _updateIndex:lastIndex];
+    
     for (NNRotationBannerViewCell *reusableCell in _visibleCells) {
         [self queueReusableCell:reusableCell];
     }
@@ -171,7 +178,7 @@
     NSMutableArray *indexs = @[].mutableCopy;
     
     int startIndex = rect.origin.x / self.frame.size.width;
-    for (int i = startIndex; i < startIndex+2; i++) {
+    for (int i = startIndex; CGRectGetMaxX(rect) > CGRectGetMinX([self _rectForItemAtIndex:i]); i++) {
         [indexs addObject:@(i)];
     }
 
@@ -191,6 +198,18 @@
         }
     }
     return NNRotationBannerCellIndexNotFound;
+}
+
+- (void)_updateIndex:(int)index
+{
+    if (_lastIndex == index) {
+        return;
+    }
+    
+    _lastIndex = index;
+    if (self.delegate && [self.delegate respondsToSelector:@selector(rotationBanner:updateCurrentIndex:)]) {
+        [self.delegate rotationBanner:self updateCurrentIndex:[self _convertIndexFromInternalIndex:_lastIndex]];
+    }
 }
 
 #pragma mark - Touch Handler

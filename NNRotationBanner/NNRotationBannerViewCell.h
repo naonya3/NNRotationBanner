@@ -12,6 +12,7 @@
 
 @property (nonatomic, copy, readonly) NSString *reuseIdentifier;
 @property (nonatomic, strong, readonly) UIView *contentView;
+@property (nonatomic) BOOL highlighted;
 
 // TEST
 @property (nonatomic, strong) UILabel *textLabel;

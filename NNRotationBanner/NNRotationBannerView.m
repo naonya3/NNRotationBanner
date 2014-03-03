@@ -220,6 +220,8 @@
     int index = [self _indexForItemAtPoint:point];
     if (index != NNRotationBannerCellIndexNotFound) {
         _touchedIndex = index;
+        NNRotationBannerViewCell *cell = [self _cellForIndex:_touchedIndex];
+        cell.highlighted = YES;
     }
 }
 
@@ -238,6 +240,8 @@
         if (self.delegate && [self.delegate respondsToSelector:@selector(rotationBanner:didSelectItemAtIndex:)]) {
             [self.delegate rotationBanner:self didSelectItemAtIndex:[self _convertIndexFromInternalIndex:index]];
         }
+        NNRotationBannerViewCell *cell = [self _cellForIndex:_touchedIndex];
+        cell.highlighted = NO;
     }
     _touchedIndex = NNRotationBannerCellIndexNotFound;
 }
@@ -245,6 +249,10 @@
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [super touchesCancelled:touches withEvent:event];
+    if (_touchedIndex != NNRotationBannerCellIndexNotFound) {
+        NNRotationBannerViewCell *cell = [self _cellForIndex:_touchedIndex];
+        cell.highlighted = NO;
+    }
     _touchedIndex = NNRotationBannerCellIndexNotFound;
 }
 

@@ -15,12 +15,14 @@ typedef enum {
     NNRotationBannerCellIndexNotFound = -1
 }NNRotationBannerCellIndex;
 
-@class NNRotationBannerViewCell, uitable;
+@class NNRotationBannerViewCell;
 
 @interface NNRotationBannerView : UIScrollView
 
 @property (nonatomic) int currentIndex;
 @property (nonatomic, weak) id<NNRotationBannerViewDelegate>delegate;
+@property (nonatomic) BOOL autoScroll;
+@property (nonatomic) NSTimeInterval autoScrollInterval;
 
 - (NNRotationBannerViewCell *)dequeueReusableCellWithIdentifier:(NSString *)reuseIdentifier;
 

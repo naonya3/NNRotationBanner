@@ -42,7 +42,10 @@
                                                                             self.view.frame.size
                                                                         }];
     _rotationBannerView.delegate = self;
-    _rotationBannerView.pagingEnabled = NO;
+    _rotationBannerView.pagingEnabled = YES;
+    _rotationBannerView.autoScroll = YES;
+    _rotationBannerView.autoScrollInterval = 3;
+    
     [self.view addSubview:_rotationBannerView];
     
     NSMutableArray *tmpArr = @[].mutableCopy;

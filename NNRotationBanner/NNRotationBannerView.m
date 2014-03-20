@@ -14,9 +14,10 @@
     int _lastIndex;
     NSMutableSet *_visibleCells;
     NSMutableDictionary *_supplementaryViewReuseQueues;
-    
-    
     int _touchedIndex;
+    
+    NSTimeInterval *_autoScrollCounter;
+    NSTimer *_autoScrollTimer;
 }
 
 @end
@@ -47,10 +48,39 @@
     self.showsVerticalScrollIndicator = NO;
     self.pagingEnabled = YES;
     
+    _autoScrollInterval = 3.;
+    
     _numOfContent = 0;
     _lastIndex = 0;
     _supplementaryViewReuseQueues = @{}.mutableCopy;
     _visibleCells = [[NSMutableSet alloc] init];
+}
+
+- (void)setAutoScroll:(BOOL)autoScroll
+{
+    _autoScroll = autoScroll;
+    if (_autoScroll) {
+        [self _startAutoScrollTimerIfEnable];
+    } else {
+        [self _stopAutoScrollTimer];
+    }
+}
+
+- (void)_stopAutoScrollTimer
+{
+    [_autoScrollTimer invalidate];
+}
+
+- (void)_startAutoScrollTimerIfEnable
+{
+    if (!self.pagingEnabled || !_autoScroll) return;
+    [self _stopAutoScrollTimer];
+    _autoScrollTimer = [NSTimer scheduledTimerWithTimeInterval:_autoScrollInterval target:self selector:@selector(_timerHandler:) userInfo:Nil repeats:YES];
+}
+
+- (void)_timerHandler:(id)sender
+{
+    [self setContentOffset:CGPointMake(self.contentOffset.x+self.frame.size.width, 0) animated:YES];
 }
 
 - (void)layoutSubviews
@@ -93,6 +123,7 @@
         [self queueReusableCell:reusableCell];
     }
     _visibleCells = visibleCells;
+    [self _startAutoScrollTimerIfEnable];
 }
 
 - (void)queueReusableCell:(NNRotationBannerViewCell *)cell
@@ -256,5 +287,9 @@
     _touchedIndex = NNRotationBannerCellIndexNotFound;
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    
+}
 
 @end

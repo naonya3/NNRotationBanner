@@ -56,6 +56,11 @@
     _visibleCells = [[NSMutableSet alloc] init];
 }
 
+- (void)dealloc
+{
+    [self _stopAutoScrollTimer];
+}
+
 - (void)setAutoScroll:(BOOL)autoScroll
 {
     _autoScroll = autoScroll;
